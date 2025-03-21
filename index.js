@@ -35,7 +35,7 @@ const resolvers = {
     },
     Mutation: {
         addBook: (_, args) => {
-            const newBook = {
+            let newBook = {
                 id: String(db.books.length + 1),
                 title: args.title,
                 author_id: args.author_id,
@@ -44,15 +44,15 @@ const resolvers = {
             return newBook;
         },
         updateBook: (_, args) => {
-            const book = db.books.find(book => book.id === args.id);
+            let book = db.books.find(book => book.id === args.id);
             if (!book) throw new Error('Book not found');
             book.title = args.title;
             return book;
         },
         deleteBook: (_, args) => {
-            const index = db.books.findIndex(book => book.id === args.id);
+            let index = db.books.findIndex(book => book.id === args.id);
             if (index === -1) throw new Error('Book not found');
-            const deletedBook = db.books.splice(index, 1)[0];
+            let deletedBook = db.books.splice(index, 1)[0];
             return deletedBook;
         }
     }
